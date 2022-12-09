@@ -58,6 +58,13 @@ body a {
 .content__title {
   margin-bottom: 40px;
   font-size: 25px;
-  font-weight: 500;
+  font-weight: 400;
   text-align: center;
+}
+
+/* TILES NAVIGATION STYLES - !!! you neeed them */
+.tiles-nav__item {
+  width: 350px;
+  height: 200px;
+  border: 1px solid;
 }
