@@ -50,7 +50,7 @@ body a {
 }
 
 .content {
-  width: 700px;
+  width: 800px;
   max-width: 95%;
   margin: auto;
 }
@@ -63,9 +63,17 @@ body a {
 }
 
 /* TILES NAVIGATION STYLES - !!! you neeed them */
+.tiles-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
 .tiles-nav__item {
-  width: 350px;
-  height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
   background-color: #4158d0;
   background-image: linear-gradient(
     43deg,
