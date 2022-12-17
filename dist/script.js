@@ -13,11 +13,13 @@ tile.addEventListener("mouseenter", (event) => {
   const cursorX = event.clientX;
   const cursorY = event.clientY;
 
-  const horzCenter = tileXLeft + (tileXRight - tileXLeft) / 2;
+  const tileCenterX = tileXLeft + (tileXRight - tileXLeft) / 2;
+  const tileCenterY = tileYTop + (tileYBottom - tileYTop) / 2;
 
-  const horzDirection = cursorX < horzCenter ? "left" : "right";
+  const horzDirection = cursorX < tileCenterX ? "left" : "right";
+  const vertDirection = cursorY < tileCenterY ? "top" : "bottom";
 
   console.log({ cursorX, cursorY });
   console.log({ tileXLeft, tileXRight, tileYTop, tileYBottom });
-  console.log(horzDirection);
+  console.log(horzDirection, vertDirection);
 });
