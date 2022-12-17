@@ -31,19 +31,33 @@ tile.addEventListener("mousemove", (event) => {
 
   let direction = "";
 
-  if (event.movementY > 0 && event.movementX === 0) {
+  if (
+    event.movementY > 0 &&
+    (Math.abs(event.movementY) > Math.abs(event.movementX) ||
+      event.movementY === event.movementX)
+  ) {
     direction = "down";
   }
 
-  if (event.movementY < 0 && event.movementX === 0) {
+  if (
+    event.movementY < 0 &&
+    (Math.abs(event.movementY) > Math.abs(event.movementX) ||
+      event.movementY === event.movementX)
+  ) {
     direction = "up";
   }
 
-  if (event.movementY === 0 && event.movementX > 0) {
+  if (
+    event.movementX > 0 &&
+    Math.abs(event.movementX) > Math.abs(event.movementY)
+  ) {
     direction = "right";
   }
 
-  if (event.movementY === 0 && event.movementX < 0) {
+  if (
+    event.movementX < 0 &&
+    Math.abs(event.movementX) > Math.abs(event.movementY)
+  ) {
     direction = "left";
   }
 
