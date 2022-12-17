@@ -138,5 +138,10 @@ body a {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: invert(100%);
+  opacity: 0;
   z-index: 1;
+}
+
+.tile__hover-elem.js-visible {
+  opacity: 1;
 }

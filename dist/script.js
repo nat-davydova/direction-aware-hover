@@ -20,6 +20,9 @@ tile.addEventListener("mousemove", (event) => {
   const hoverElem = document.createElement("div");
   hoverElem.classList.add("tile__hover-elem");
   tile.appendChild(hoverElem);
+  setTimeout(() => {
+    hoverElem.classList.add("js-visible");
+  }, 10);
 
   console.log({
     direction,
@@ -32,7 +35,10 @@ tile.addEventListener("mouseleave", () => {
   mouseEnterFlag = false;
 
   const hoverElem = tile.querySelector(".tile__hover-elem");
-  hoverElem.remove();
+  hoverElem.classList.remove("js-visible");
+  setTimeout(() => {
+    hoverElem.remove();
+  }, 200);
 });
 
 function getMousemoveDirection(event) {
