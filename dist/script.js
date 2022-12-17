@@ -1,19 +1,21 @@
-const tile1 = document.querySelector(".tiles-nav__item");
+const tile = document.querySelectorAll(".tiles-nav__item")[1];
 
-tile1.addEventListener("mouseenter", (event) => {
+tile.addEventListener("mouseenter", (event) => {
   const {
     left: tileXLeft,
     right: tileXRight,
     top: tileYTop,
     bottom: tileYBottom,
     width: tileWidth,
-    height: tileWidthHeight
-  } = tile1.getBoundingClientRect();
+    height: tileHeight
+  } = tile.getBoundingClientRect();
 
   const cursorX = event.clientX;
   const cursorY = event.clientY;
 
-  const horzDirection = cursorX < tileWidth / 2 ? "left" : "right";
+  const horzCenter = tileXLeft + (tileXRight - tileXLeft) / 2;
+
+  const horzDirection = cursorX < horzCenter ? "left" : "right";
 
   console.log({ cursorX, cursorY });
   console.log({ tileXLeft, tileXRight, tileYTop, tileYBottom });
