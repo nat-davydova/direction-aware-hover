@@ -30,17 +30,7 @@ navigation.addEventListener("mousemove", (event) => {
 });
 
 navigationItems.forEach((elem) => {
-  elem.addEventListener("mouseleave", (event) => {
-    const currentTile = event.target.closest(".tiles-nav__item");
-
-    mouseEnterFlag = false;
-
-    const hoverElem = currentTile.querySelector(".tile__hover-elem");
-    hoverElem.classList.remove("js-visible");
-    setTimeout(() => {
-      hoverElem.remove();
-    }, ANIMATION_DURATION_MS);
-  });
+  elem.addEventListener("mouseleave", (event) => clearOnMouseLeaving(event));
 });
 
 function getMousemoveDirection(event) {
@@ -93,6 +83,18 @@ function createAndInsertHoverElem({ direction, parentElem }) {
   }, 10);
 
   return hoverElem;
+}
+
+function clearOnMouseLeaving(clearingEvent) {
+  const currentTile = event.target.closest(".tiles-nav__item");
+
+  mouseEnterFlag = false;
+
+  const hoverElem = currentTile.querySelector(".tile__hover-elem");
+  hoverElem.classList.remove("js-visible");
+  setTimeout(() => {
+    hoverElem.remove();
+  }, ANIMATION_DURATION_MS);
 }
 
 function clearStaleHoverItems(parentElem) {
