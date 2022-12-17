@@ -1,4 +1,4 @@
-const ANIMATION_DURATION_MS = 150;
+const ANIMATION_DURATION_MS = 200;
 
 const navigation = document.querySelector(".tiles-nav");
 const navigationItems = document.querySelectorAll(".tiles-nav__item");
@@ -81,11 +81,7 @@ function getMousemoveDirection(event) {
 
 function createAndInsertHoverElem({ direction, parentElem }) {
   //check if there are old hoverElems and clear them. It can be if very fast mouseenter/mouseleave card
-  const oldHoverElem = parentElem.querySelector(".tile__hover-elem");
-
-  if (oldHoverElem) {
-    oldHoverElem.remove();
-  }
+  clearStaleHoverItems(parentElem);
 
   const hoverElem = document.createElement("div");
   hoverElem.classList.add("tile__hover-elem");
@@ -97,6 +93,14 @@ function createAndInsertHoverElem({ direction, parentElem }) {
   }, 10);
 
   return hoverElem;
+}
+
+function clearStaleHoverItems(parentElem) {
+  const staleHoverElem = parentElem.querySelector(".tile__hover-elem");
+
+  if (staleHoverElem) {
+    staleHoverElem.remove();
+  }
 }
 
 function isDOMElementHovered(DOMElem) {
