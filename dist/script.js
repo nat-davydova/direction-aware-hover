@@ -19,13 +19,7 @@ tile.addEventListener("mousemove", (event) => {
 
   mouseEnterFlag = true;
 
-  const hoverElem = document.createElement("div");
-  hoverElem.classList.add("tile__hover-elem");
-  hoverElem.style.transitionDuration = `${ANIMATION_DURATION_MS}ms`;
-  tile.appendChild(hoverElem);
-  setTimeout(() => {
-    hoverElem.classList.add("js-visible");
-  }, 10);
+  createAndInsertHoverElem(tile);
 
   console.log({
     direction,
@@ -78,6 +72,16 @@ function getMousemoveDirection(event) {
   }
 
   return direction;
+}
+
+function createAndInsertHoverElem(parentElem) {
+  const hoverElem = document.createElement("div");
+  hoverElem.classList.add("tile__hover-elem");
+  hoverElem.style.transitionDuration = `${ANIMATION_DURATION_MS}ms`;
+  parentElem.appendChild(hoverElem);
+  setTimeout(() => {
+    hoverElem.classList.add("js-visible");
+  }, 10);
 }
 
 function isDOMElementHovered(DOMElem) {
