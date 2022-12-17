@@ -101,19 +101,11 @@ body a {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* .tiles-nav__item:nth-child(1):before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: invert(100%);
-} */
+.tiles-nav__item:hover:before {
+  opacity: 1;
+}
 
-.tiles-nav__item > * {
+.tile > * {
   position: relative;
   z-index: 2;
 }
@@ -133,4 +125,19 @@ body a {
 
 .tile__descr {
   margin: 0;
+}
+
+.tile__hover-elem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  transition: opacity 0.2s linear 0s;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: invert(100%);
+          backdrop-filter: invert(100%);
+  z-index: 1;
 }

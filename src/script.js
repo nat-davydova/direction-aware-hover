@@ -7,28 +7,35 @@ tile.addEventListener("mousemove", (event) => {
     return;
   }
 
-  const {
-    left: tileXLeft,
-    right: tileXRight,
-    top: tileYTop,
-    bottom: tileYBottom,
-    width: tileWidth,
-    height: tileHeight
-  } = tile.getBoundingClientRect();
-
-  const cursorX = event.clientX;
-  const cursorY = event.clientY;
-
-  const isHovered =
-    cursorX >= tileXLeft &&
-    cursorX <= tileXRight &&
-    cursorY >= tileYTop &&
-    cursorY <= tileYBottom;
+  const isHovered = isDOMElementHovered(tile);
 
   if (!isHovered) {
     return;
   }
 
+  const direction = getMousemoveDirection(event);
+
+  mouseEnterFlag = true;
+
+  const hoverElem = document.createElement("div");
+  hoverElem.classList.add("tile__hover-elem");
+  tile.appendChild(hoverElem);
+
+  console.log({
+    direction,
+    movementX: event.movementX,
+    movementY: event.movementY
+  });
+});
+
+tile.addEventListener("mouseleave", () => {
+  mouseEnterFlag = false;
+
+  const hoverElem = tile.querySelector(".tile__hover-elem");
+  hoverElem.remove();
+});
+
+function getMousemoveDirection(event) {
   let direction = "";
 
   if (
@@ -61,16 +68,25 @@ tile.addEventListener("mousemove", (event) => {
     direction = "left";
   }
 
-  mouseEnterFlag = true;
+  return direction;
+}
 
-  console.log({ cursorX, cursorY });
-  //console.log({ tileXLeft, tileXRight, tileYTop, tileYBottom });
-  console.log(isHovered);
-  console.log({
-    direction,
-    movementX: event.movementX,
-    movementY: event.movementY
-  });
-});
+function isDOMElementHovered(DOMElem) {
+  const {
+    left: DOMElemXLeft,
+    right: DOMElemXRight,
+    top: DOMElemYTop,
+    bottom: DOMElemYBottom
+  } = DOMElem.getBoundingClientRect();
 
-tile.addEventListener("mouseleave", () => (mouseEnterFlag = false));
+  const cursorX = event.clientX;
+  const cursorY = event.clientY;
+
+  const isHovered =
+    cursorX >= DOMElemXLeft &&
+    cursorX <= DOMElemXRight &&
+    cursorY >= DOMElemYTop &&
+    cursorY <= DOMElemYBottom;
+
+  return isHovered;
+}
