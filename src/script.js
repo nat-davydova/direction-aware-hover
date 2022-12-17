@@ -1,3 +1,5 @@
+const ANIMATION_DURATION_MS = 200;
+
 const tile = document.querySelectorAll(".tiles-nav__item")[1];
 
 let mouseEnterFlag = false;
@@ -19,6 +21,7 @@ tile.addEventListener("mousemove", (event) => {
 
   const hoverElem = document.createElement("div");
   hoverElem.classList.add("tile__hover-elem");
+  hoverElem.style.transitionDuration = `${ANIMATION_DURATION_MS}ms`;
   tile.appendChild(hoverElem);
   setTimeout(() => {
     hoverElem.classList.add("js-visible");
@@ -38,7 +41,7 @@ tile.addEventListener("mouseleave", () => {
   hoverElem.classList.remove("js-visible");
   setTimeout(() => {
     hoverElem.remove();
-  }, 200);
+  }, ANIMATION_DURATION_MS);
 });
 
 function getMousemoveDirection(event) {
