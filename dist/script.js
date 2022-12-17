@@ -19,13 +19,7 @@ tile.addEventListener("mousemove", (event) => {
 
   mouseEnterFlag = true;
 
-  createAndInsertHoverElem(tile);
-
-  console.log({
-    direction,
-    movementX: event.movementX,
-    movementY: event.movementY
-  });
+  createAndInsertHoverElem({ direction, parentElem: tile });
 });
 
 tile.addEventListener("mouseleave", () => {
@@ -74,14 +68,17 @@ function getMousemoveDirection(event) {
   return direction;
 }
 
-function createAndInsertHoverElem(parentElem) {
+function createAndInsertHoverElem({ direction, parentElem }) {
   const hoverElem = document.createElement("div");
   hoverElem.classList.add("tile__hover-elem");
+  hoverElem.classList.add(`tile__hover-elem--${direction}`);
   hoverElem.style.transitionDuration = `${ANIMATION_DURATION_MS}ms`;
   parentElem.appendChild(hoverElem);
   setTimeout(() => {
     hoverElem.classList.add("js-visible");
   }, 10);
+
+  return hoverElem;
 }
 
 function isDOMElementHovered(DOMElem) {

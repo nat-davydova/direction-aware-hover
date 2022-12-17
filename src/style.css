@@ -134,15 +134,34 @@ body a {
   width: 100%;
   height: 100%;
   content: "";
-  transition-property: opacity;
+  transition-property: transform;
   transition-timing-function: linear;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: invert(100%);
-  opacity: 0;
   z-index: 1;
 }
 
+.tile__hover-elem--up {
+  transform: scaleY(0);
+  transform-origin: bottom center;
+}
+
+.tile__hover-elem--down {
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+.tile__hover-elem--left {
+  transform: scaleX(0);
+  transform-origin: center right;
+}
+
+.tile__hover-elem--right {
+  transform: scaleX(0);
+  transform-origin: center left;
+}
+
 .tile__hover-elem.js-visible {
-  opacity: 1;
+  transform: scale(1, 1);
 }
