@@ -3,7 +3,7 @@ const ANIMATION_DURATION_MS = 200;
 const navigation = document.querySelector(".tiles-nav");
 const navigationItems = document.querySelectorAll(".tiles-nav__item");
 
-let mouseEnterFlag = false;
+let mouseEnterFlag;
 
 navigation.addEventListener("mousemove", (event) => {
   if (!event.target.closest(".tiles-nav__item")) {
@@ -34,39 +34,35 @@ navigationItems.forEach((elem) => {
 });
 
 function getMousemoveDirection(event) {
-  let direction = "";
-
   if (
     event.movementY > 0 &&
     (Math.abs(event.movementY) > Math.abs(event.movementX) ||
-      event.movementY === event.movementX)
+      Math.abs(event.movementY) === Math.abs(event.movementX))
   ) {
-    direction = "down";
+    return "down";
   }
 
   if (
     event.movementY < 0 &&
     (Math.abs(event.movementY) > Math.abs(event.movementX) ||
-      event.movementY === event.movementX)
+      Math.abs(event.movementY) === Math.abs(event.movementX))
   ) {
-    direction = "up";
+    return "up";
   }
 
   if (
     event.movementX > 0 &&
     Math.abs(event.movementX) > Math.abs(event.movementY)
   ) {
-    direction = "right";
+    return "right";
   }
 
   if (
     event.movementX < 0 &&
     Math.abs(event.movementX) > Math.abs(event.movementY)
   ) {
-    direction = "left";
+    return "left";
   }
-
-  return direction;
 }
 
 function createAndInsertHoverElem({ direction, parentElem }) {
@@ -86,15 +82,31 @@ function createAndInsertHoverElem({ direction, parentElem }) {
 }
 
 function clearOnMouseLeaving(clearingEvent) {
-  const currentTile = event.target.closest(".tiles-nav__item");
+  let directionOut;
 
-  mouseEnterFlag = false;
+  document.addEventListener(
+    "mousemove",
+    (event) => {
+      directionOut = getMousemoveDirection(event);
 
-  const hoverElem = currentTile.querySelector(".tile__hover-elem");
-  hoverElem.classList.remove("js-visible");
-  setTimeout(() => {
-    hoverElem.remove();
-  }, ANIMATION_DURATION_MS);
+      const currentTile = clearingEvent.target.closest(".tiles-nav__item");
+
+      mouseEnterFlag = false;
+
+      if (!currentTile) {
+        return;
+      }
+
+      const hoverElem = currentTile.querySelector(".tile__hover-elem");
+      hoverElem.classList.add(`tile__hover-elem--out-${directionOut}`);
+
+      hoverElem.classList.remove("js-visible");
+      setTimeout(() => {
+        hoverElem.remove();
+      }, ANIMATION_DURATION_MS);
+    },
+    { once: true }
+  );
 }
 
 function clearStaleHoverItems(parentElem) {

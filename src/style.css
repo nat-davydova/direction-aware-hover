@@ -162,6 +162,26 @@ body a {
   transform-origin: center left;
 }
 
+.tile__hover-elem--out-up {
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+.tile__hover-elem--out-down {
+  transform: scaleY(0);
+  transform-origin: bottom center;
+}
+
+.tile__hover-elem--out-left {
+  transform: scaleX(0);
+  transform-origin: center left;
+}
+
+.tile__hover-elem--out-right {
+  transform: scaleX(0);
+  transform-origin: center right;
+}
+
 .tile__hover-elem.js-visible {
   transform: scale(1, 1);
 }
