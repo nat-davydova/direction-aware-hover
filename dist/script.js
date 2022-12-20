@@ -5,7 +5,13 @@ const navigationItems = document.querySelectorAll(".tiles-nav__item");
 
 let mouseEnterFlag;
 
-navigation.addEventListener("mousemove", (event) => {
+navigation.addEventListener("mousemove", (event) => showHoverElem(event));
+
+navigationItems.forEach((elem) => {
+  elem.addEventListener("mouseleave", (event) => removeHoverElem(event));
+});
+
+function showHoverElem(event) {
   if (!event.target.closest(".tiles-nav__item")) {
     return;
   }
@@ -16,7 +22,7 @@ navigation.addEventListener("mousemove", (event) => {
     return;
   }
 
-  const isHovered = isDOMElementHovered(currentTile);
+  const isHovered = isDOMElementHovered({ event, DOMElem: currentTile });
 
   if (!isHovered) {
     return;
@@ -27,11 +33,7 @@ navigation.addEventListener("mousemove", (event) => {
   mouseEnterFlag = true;
 
   createAndInsertHoverElem({ direction, parentElem: currentTile });
-});
-
-navigationItems.forEach((elem) => {
-  elem.addEventListener("mouseleave", (event) => clearOnMouseLeaving(event));
-});
+}
 
 function getMousemoveDirection(event) {
   if (
@@ -81,7 +83,7 @@ function createAndInsertHoverElem({ direction, parentElem }) {
   return hoverElem;
 }
 
-function clearOnMouseLeaving(clearingEvent) {
+function removeHoverElem(clearingEvent) {
   let directionOut;
 
   document.addEventListener(
@@ -98,6 +100,11 @@ function clearOnMouseLeaving(clearingEvent) {
       }
 
       const hoverElem = currentTile.querySelector(".tile__hover-elem");
+
+      if (!hoverElem) {
+        return;
+      }
+
       hoverElem.classList.add(`tile__hover-elem--out-${directionOut}`);
 
       hoverElem.classList.remove("js-visible");
@@ -117,7 +124,7 @@ function clearStaleHoverItems(parentElem) {
   }
 }
 
-function isDOMElementHovered(DOMElem) {
+function isDOMElementHovered({ event, DOMElem }) {
   const {
     left: DOMElemXLeft,
     right: DOMElemXRight,

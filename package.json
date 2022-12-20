@@ -1,8 +1,8 @@
 {
   "name": "direction-aware-hover-effect",
-  "version": "2022.12.19-13.34.04",
-  "license": "UNLICENSED",
-  "homepage": "https://codepen.io/nat-davydova/pen/YzvMNYO/91c83250ea53b76fddd51a99117146fc",
+  "version": "2022.12.20-17.53.56",
+  "license": "MIT",
+  "homepage": "https://codepen.io/nat-davydova/pen/YzvMNYO",
   "scripts": {
     "build": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
     "serve": "gulp serve -f ./build/gulpfile.js --cwd ./ --continue",
