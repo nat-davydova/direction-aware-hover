@@ -18,7 +18,7 @@ without any code references. Hope you like it =)
 
 * install dependencies
 ```js
-mpm install
+npm install
 // or
 yarn
 ```
